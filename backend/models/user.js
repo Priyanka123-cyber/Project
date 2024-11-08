@@ -20,7 +20,7 @@ const userSchema=mongoose.Schema({
     },
     role:{
         type:String,
-        enum:['candidate','recruiter'],//in og it is student instead of candidate
+        enum:['student','recruiter'],
         required:true
     },
     profile:{

@@ -9,8 +9,11 @@ const jobSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    requirements:{
-        type:String,
+    requirements:[{
+        type: String
+    }],
+    experienceLevel:{
+        type:Number,
         required:true
     },
     salary:{
@@ -39,7 +42,7 @@ const jobSchema=mongoose.Schema({
         ref:'User',
         required:true
     },
-    application:[
+    applications:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:'Application'

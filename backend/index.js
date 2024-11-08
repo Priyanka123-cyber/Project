@@ -29,6 +29,10 @@ app.use('/api/user', userRoute);
 const companyRoute=require('./routes/company_route');
 app.use('/api/company', companyRoute);
 
+const applicationRoute= require('./routes/application_route')
+app.use('/api/application', applicationRoute);
+
+
 
 
 const PORT=process.env.PORT || 3000;

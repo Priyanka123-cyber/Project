@@ -6,7 +6,9 @@ const jwt = require('jsonwebtoken')
 const register = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, password, role } = req.body;
+        console.log(req.body);
         //checking whether all fields are filled during sign-in
+        
         if (!fullname || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({
                 message: "Something is missing",
@@ -21,6 +23,7 @@ const register = async (req, res) => {
                 success: false,
             })
         }
+        //hashing the password,10-salt rounds(iterations)
         const hashedPassword = await bcrypt.hash(password, 10);
         //adding to database
         await User.create({
