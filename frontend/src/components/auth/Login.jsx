@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import Navbar from '../common/Navbar'
-import { Box, Button, FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading, setUser } from '../../redux/authSlice';
 const Login = () => {
     const navigate = useNavigate();
+    const { loading, user } = useSelector(store => store.auth);
+    //dispatch actions to the Redux store
+    const dispatch = useDispatch();
     const [input, setInput] = useState({
         email: "",
         password: "",
@@ -15,21 +20,25 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        axios.post('http://localhost:8000/api/user/login', input, {
-            headers: { 'Content-Type': "application/json" },
-            withCredentials: true,
-        })
-            .then(res => {
-                if (res.data.success) {
-                    alert(res.data.message); 
-                    navigate("/");
-                }
-            })
-            .catch(error => {
-               console.log(error);
-               alert(res.data.message);  
+        try {
+            dispatch(setLoading(true));
+            const res = await axios.post(`http://localhost:8000/api/user/login`, input, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true,
             });
+            if (res.data.success) {
+                dispatch(setUser(res.data.user));
+                navigate("/");
+                alert(res.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            alert(error.response.data.message);
+        } finally {
+            dispatch(setLoading(false));
+        }
     }
     return (
         <div>
@@ -104,9 +113,16 @@ const Login = () => {
                         color="primary"
                         fullWidth
                         sx={{ marginTop: 2 }}
-                        onClick={handleSubmit}
+                        onClick={handleSubmit} 
+                        className="my-4"
                     >
-                        Login
+                        {loading ? (
+                            <>
+                                <CircularProgress size={24} /> Please wait
+                            </>
+                        ) : (
+                            "Login"
+                        )}
                     </Button>
                     <Link to={'/signup'}><span >Dont have an account?</span></Link>
                 </form>

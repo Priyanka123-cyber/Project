@@ -1,9 +1,11 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { Await, useNavigate } from 'react-router-dom';
 import Navbar from '../common/Navbar'
 import axios from 'axios'
-import  {Link} from 'react-router-dom';
-import { Box, Button, FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Link } from 'react-router-dom';
+import { Box, Button, CircularProgress, FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { setLoading } from '../../redux/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Signup = () => {
     const [input, setInput] = useState({
@@ -14,14 +16,16 @@ const Signup = () => {
         role: "",
         file: ""
     });
+    const { loading, user } = useSelector(store => store.auth);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleInputs = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     }
     const handleFile = (e) => {
         setInput({ ...input, file: e.target.files?.[0] });
     }
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();    //formdata object
         formData.append("fullname", input.fullname);
@@ -32,20 +36,24 @@ const Signup = () => {
         if (input.file) {
             formData.append("file", input.file);
         }
-        axios.post('http://localhost:8000/api/user/register', formData, {
-            headers: { 'Content-Type': "multipart/form-data" },
-            withCredentials: true,
-        })
-        .then(res => {
+
+        try {
+            dispatch(setLoading(true));
+            const res = await axios.post(`http://localhost:8000/api/user/register`, formData, {
+                headers: { 'Content-Type': "multipart/form-data" },
+                withCredentials: true,
+            });
             if (res.data.success) {
-                alert(response.data.message); 
                 navigate("/login");
+                alert(res.data.message);
             }
-        })
-        .catch(error => {
-           console.log(error);
-           alert(response.data.message); 
-        });
+        } catch (error) {
+            console.log(error);
+            alert(error.res.data.message);
+        }
+        finally {
+            dispatch(setLoading(false));
+        }
     }
 
     return (
@@ -109,7 +117,7 @@ const Signup = () => {
                         value={input.phoneNumber}
                         onChange={handleInputs}
                     />
-                    <label htmlFor="profilePhoto" className="text-gray-700 font-medium">
+                    <label className="text-gray-700 font-medium">
                         Profile
                     </label>
                     <input
@@ -149,10 +157,17 @@ const Signup = () => {
                         variant="contained"
                         color="primary"
                         fullWidth
-                        onClick={handleSubmit}
                         sx={{ marginTop: 2 }}
+                        onClick={handleSubmit} // Add the onClick handler for the button
+                        className="my-4"
                     >
-                        Sign Up
+                        {loading ? (
+                            <>
+                                <CircularProgress size={24} /> Please wait
+                            </>
+                        ) : (
+                            "Sign-up"
+                        )}
                     </Button>
                     <Link to={'/login'}><span >Already have an account?</span></Link>
                 </form>

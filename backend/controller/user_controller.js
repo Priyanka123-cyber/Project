@@ -1,6 +1,8 @@
 const User = require('../models/user.js');
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const getDataUri = require('../db/datauri.js');
+const cloudinary= require('../db/cloudinary.js')
 
 //For registering a user
 const register = async (req, res) => {
@@ -15,6 +17,9 @@ const register = async (req, res) => {
                 success: false
             });
         };
+        const file=req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
         //checking whether the person is a previous user
         const user = await User.findOne({ email });
         if (user) {
@@ -31,7 +36,10 @@ const register = async (req, res) => {
             email,
             phoneNumber,
             password: hashedPassword,
-            role
+            role,
+            profile:{
+                profilePhoto:cloudResponse.secure_url
+            }
         });
 
         return res.status(201).json({
@@ -123,6 +131,14 @@ const logout = async (req, res) => {
 const updateProfile = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, bio, skills } = req.body;
+
+        const file=req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+      
+
+        console.log(fullname, email, phoneNumber, bio, skills);
         let skillsArray;
         if (skills) {
             skillsArray = skills.split(",");
@@ -143,6 +159,13 @@ const updateProfile = async (req, res) => {
         if (bio) user.profile.bio = bio
         if (skills) user.profile.skills = skillsArray
 
+        //For resume
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+            user.profile.resumeOriginalName = file.originalname // Save the original file name
+        }
+
+
         await user.save();
         //
         user = {
@@ -160,7 +183,7 @@ const updateProfile = async (req, res) => {
             success: true
         })
     }
-    catch {
+    catch(error){
         console.log(error)
     }
 }
