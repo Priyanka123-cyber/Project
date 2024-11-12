@@ -27,7 +27,7 @@ const Profile = () => {
                     <Box display="flex" alignItems="center" sx={{ gap: 2 }}>
                         <Avatar
                             src={user.profile.profilePhoto}
-                            sx={{ width: 56, height: 56 }}
+                            sx={{ width: 130, height: 130 }}
                         />
                         <Box>
                             <Typography variant="h6">{user.fullname}</Typography>
@@ -45,11 +45,11 @@ const Profile = () => {
                 <Box display="flex" justifyContent="space-between" sx={{ marginLeft: '100px', marginRight: '100px', marginTop: 2 }}>
                     <Box display="flex" flexDirection="column" alignItems="flex-start" sx={{ gap: 1 }}>
                         <Box display="flex" alignItems="center" sx={{ marginBottom: 2 }}>
-                            <EmailOutlinedIcon />
+                            <EmailOutlinedIcon sx={{color:'#1d2c57'}} />
                             <span style={{ marginLeft: '8px' }}>{user.email}</span>
                         </Box>
                         <Box display="flex" alignItems="center">
-                            <PermContactCalendarOutlinedIcon />
+                            <PermContactCalendarOutlinedIcon sx={{color:'#1d2c57'}} />
                             <span style={{ marginLeft: '8px' }}>{user.phoneNumber}</span>
                         </Box>
                     </Box>
@@ -70,7 +70,7 @@ const Profile = () => {
                                         key={index}
                                         sx={{
                                             backgroundColor: '#DCDCDC', // light grey background
-                                            color: '#1976D2',  // blue text color
+                                            color: '#10678c',  // blue text color
                                             fontWeight: 'bold',  // bold text
                                             padding: '8px 16px', // padding for badge
                                             borderRadius: '12px', // rounded corners

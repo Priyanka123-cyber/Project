@@ -26,6 +26,9 @@ require('./db/connection')
 const userRoute=require('./routes/user_route');
 app.use('/api/user', userRoute);
 
+const jobRoute=require('./routes/job_route');
+app.use('/api/job', jobRoute)
+
 const companyRoute=require('./routes/company_route');
 app.use('/api/company', companyRoute);
 

@@ -33,23 +33,32 @@ function Navbar() {
         setAnchorEl(null);
     };
 
+    const buttonstyles={
+        backgroundColor:'#0881a0',padding: '10px 20px', borderRadius: '8px',marginRight: '16px'
+    }
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
+                <AppBar position="static" sx={{ backgroundColor: '#0881a0'}}>
                     <Toolbar>
+                    <img
+                        src="https://www.futuremug.co.in/resources/assets/home/images/client-logo/7.png"  
+                        alt="Placement Portal Icon"
+                        style={{ width: 110, height: 70}}  
+                    />
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Job Portal
+                            Placement Portal
                         </Typography>
-                        <Link to={'/'}><Button variant="contained" color="primary">Home</Button></Link>
-                        <Link to={'/jobs'}><Button variant="contained" color="primary">Jobs</Button></Link>
-                        <Link to={'/browse'}><Button variant="contained" color="primary">Browse</Button></Link>
+                        <Link to={'/'}><Button variant="contained" sx={buttonstyles}>Home</Button></Link>
+                        <Link to={'/jobs'}><Button variant="contained" sx={buttonstyles}>Jobs</Button></Link>
+                        <Link to={'/browse'}><Button variant="contained" sx={buttonstyles}>Browse</Button></Link>
 
                         {
                             !user ? (
                                 <>
-                                    <Link to={'/login'}><Button variant="contained" color="primary">Login</Button></Link>
-                                    <Link to={'/signup'}><Button variant="contained" color="primary">Sign-up</Button></Link>
+                                    <Link to={'/login'}><Button variant="contained" sx={buttonstyles}>Login</Button></Link>
+                                    <Link to={'/signup'}><Button variant="contained" sx={buttonstyles}>Sign-up</Button></Link>
                                 </>
                             ) : (
                                 <Avatar

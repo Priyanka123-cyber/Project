@@ -16,7 +16,7 @@ const Footer = () => {
         <Typography variant="h6" fontWeight="bold">
           Placement Portal
         </Typography>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body2" color="#1d2c57">
           © 2024 ICT Academy. All rights reserved.
         </Typography>
       </Box>
@@ -24,21 +24,21 @@ const Footer = () => {
       <Box sx={{ mt: 2 }}>
         <IconButton 
           href="https://facebook.com" 
-          color="primary" 
+          sx={{color:"#0f888b"}}
           aria-label="Facebook"
         >
           <FacebookIcon />
         </IconButton>
         <IconButton 
           href="https://x.com" 
-          color="primary" 
+          sx={{color:"#0f888b"}}
           aria-label="Twitter"
         >
           <XIcon />
         </IconButton>
         <IconButton 
           href="https://linkedin.com" 
-          color="primary" 
+          sx={{color:"#0f888b"}}
           aria-label="LinkedIn"
         >
           <LinkedInIcon />

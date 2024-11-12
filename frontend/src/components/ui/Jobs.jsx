@@ -19,12 +19,10 @@ const Jobs = () => {
                     <Grid2 container spacing={3} justifyContent="space-around" sx={{ marginLeft: '60px', marginRight: '60px' }}>
                         {jobsArray.map((item, index) => (
                             <Grid2 xs={12} sm={6} md={4} key={index} sx={{
-                                padding: 5,
-                                borderRadius: 2,
-                                boxShadow: 4,
-                                backgroundColor: 'white',
-                                border: '1px solid',
-                                borderColor: 'grey.100',  // border-gray-100 (~#f5f5f5)
+                                    border: '1px solid #DCDCDC',  
+                                    boxShadow: '0 4px 6px #409cc4', 
+                                    padding: 2, 
+                                    borderRadius: 2, 
                             }}>
                                 <Job job={item} /> 
                             </Grid2>

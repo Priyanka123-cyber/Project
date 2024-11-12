@@ -1,5 +1,5 @@
-const Job= require('../models/job')
-const Application= require('../models/application')
+const Job = require('../models/job')
+const Application = require('../models/application')
 
 const postJob = async (req, res) => {
     try {
@@ -33,6 +33,16 @@ const postJob = async (req, res) => {
         console.log(error);
     }
 }
+const get = async(req,res)=>{     
+    try{
+    const data=await Job.find();
+    console.log(data);
+    res.status(200).send(data);
+    }catch(error){
+        res.status(404).send('Data not found');
+    }
+}
+
 //for filtering
 const getAllJobs = async (req, res) => {
     try {
@@ -65,7 +75,7 @@ const getJobById = async (req, res) => {
     try {
         const jobId = req.params.id;
         const job = await Job.findById(jobId).populate({
-            path:"applications"
+            path: "applications"
         });
         if (!job) {
             return res.status(404).json({
@@ -82,8 +92,8 @@ const getAdminJobs = async (req, res) => {
     try {
         const adminId = req.id;
         const jobs = await Job.find({ created_by: adminId }).populate({
-            path:'company',
-            createdAt:-1
+            path: 'company',
+            createdAt: -1
         });
         if (!jobs) {
             return res.status(404).json({
@@ -99,4 +109,4 @@ const getAdminJobs = async (req, res) => {
         console.log(error);
     }
 }
-module.exports={postJob,getAllJobs,getJobById,getAdminJobs}
+module.exports = { postJob, getAllJobs, getJobById, getAdminJobs,get }

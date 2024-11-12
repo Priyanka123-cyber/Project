@@ -155,10 +155,9 @@ const Signup = () => {
 
                     <Button
                         variant="contained"
-                        color="primary"
                         fullWidth
-                        sx={{ marginTop: 2 }}
-                        onClick={handleSubmit} // Add the onClick handler for the button
+                        sx={{ marginTop: 2, backgroundColor:'#0881a0' }}
+                        onClick={handleSubmit}
                         className="my-4"
                     >
                         {loading ? (

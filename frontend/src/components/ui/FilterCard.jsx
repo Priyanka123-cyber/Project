@@ -18,7 +18,7 @@ const filterData = [
 
 const FilterCard = () => {
     return (
-        <Box sx={{ width: '150px', marginLeft: '16px', padding: 2, border: '1px solid #ddd', borderRadius: 1 }}>
+        <Box sx={{ width: '250px', marginLeft: '16px', padding: 2, border: '1px solid #ddd', borderRadius: 1 }}>
             <Typography variant="h6" gutterBottom>Filter Jobs</Typography>
             <Divider sx={{ marginBottom: 2 }} />
             {filterData.map((data, index) => (

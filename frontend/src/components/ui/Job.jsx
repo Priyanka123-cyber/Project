@@ -5,7 +5,19 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Job = () => {
     const navigate = useNavigate();
-    const jobId = 'guife76gfe76';
+    const id='gddf7gheug'
+
+    const bstyles={
+        color: '#1d2c57',  
+        borderColor: '#1d2c57', 
+        margin: '4px',   
+        '&:hover': {
+          borderColor: '#f5b300', // Outline color when hovered
+          backgroundColor: '#f5b300', // Background color on hover (optional)
+          color: 'white'           // Text color on hover (optional)
+        }
+      }
+    
     return (
         <div>
             <div>
@@ -16,7 +28,7 @@ const Job = () => {
                 >
                     <p>2 days ago</p>
                     <Button className="rounded-full" size="small">
-                        <BookmarkBorderIcon />
+                        <BookmarkBorderIcon sx={{color:'#1d2c57'}}/>
                     </Button>
                 </Box>
 
@@ -24,7 +36,7 @@ const Job = () => {
             {/* Button with Company Logo */}
             <Box display="flex" alignItems="center" gap={2}>
                 <Avatar
-                    src="https://img.favpng.com/20/20/12/final-fantasy-type-0-hd-desktop-wallpaper-microsoft-display-resolution-png-favpng-0Fn0vJLaaFw9aZA3V2ETc3S8L.jpg"
+                    src="https://static.vecteezy.com/system/resources/previews/007/422/332/non_2x/geometric-wolf-head-logo-icon-design-template-flat-vector.jpg"
                     alt="Company Logo"
                     sx={{ width: 48, height: 48 }}
                 />
@@ -34,49 +46,49 @@ const Job = () => {
                 </Box>
             </Box>
             <div>
-                <h4>Title</h4>
-                <p>Description</p>
+                <h4>Job Title</h4>
+                <p>Job Description</p>
                 <Box display="flex" gap={2}> {/* Flexbox container with gap between items */}
                     <Badge
                         sx={{
                             backgroundColor: '#DCDCDC',
-                            color: '#1976D2',
+                            color: '#10678c',
                             fontWeight: 'bold',
                             borderRadius: '8px', // Add rounded edges
                             padding: '4px 8px'
                         }}
                     >
-                        12 positions
+                        position
                     </Badge>
 
                     <Badge
                         sx={{
                             backgroundColor: '#DCDCDC',
-                            color: '#1976D2',
+                            color: '#3c4324',
                             fontWeight: 'bold',
                             borderRadius: '8px', // Add rounded edges
                             padding: '4px 8px'
                         }}
                     >
-                        Part-Time
+                       jobtype
                     </Badge>
 
                     <Badge
                         sx={{
                             backgroundColor: '#DCDCDC',
-                            color: '#1976D2',
+                            color: '#1d2c57',
                             fontWeight: 'bold',
                             borderRadius: '8px', // Add rounded edges
                             padding: '4px 8px'
                         }}
                     >
-                        24 LPA
+                        salary
                     </Badge>
                 </Box>
             </div><br />
             <div>
-                <Button variant="outlined" color="primary" onClick={() => navigate(`/description/:${jobId}`)} >Details</Button>
-                <Button variant="outlined" color="primary">Save for Later</Button>
+                <Button variant="outlined" sx={bstyles} onClick={() => navigate(`/description/:id`)} >Details</Button>
+                <Button variant="outlined" sx={bstyles}>Save for Later</Button>
             </div>
         </div>
     )

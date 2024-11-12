@@ -110,9 +110,8 @@ const Login = () => {
 
                     <Button
                         variant="contained"
-                        color="primary"
                         fullWidth
-                        sx={{ marginTop: 2 }}
+                        sx={{ marginTop: 2, backgroundColor:'#0881a0' }}
                         onClick={handleSubmit} 
                         className="my-4"
                     >
@@ -129,6 +128,7 @@ const Login = () => {
             </Box>
         </div>
     )
+    
 }
 
 export default Login

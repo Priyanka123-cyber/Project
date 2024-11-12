@@ -1,53 +1,56 @@
 import { Badge, Box } from '@mui/material'
 import React from 'react'
 
-const JobCards = (job) => {
+const JobCards = () => {
   return (
     <div>
         <Box
       sx={{
-        border: '1px solid #DCDCDC',  // White border color (light grey)
-        boxShadow: '0 4px 6px #B0B0B0', // Grey shadow effect in hex
-        padding: 2, //Adds padding inside the border
-        borderRadius: 2, //Adds rounded corners to the border
+        border: '1px solid #DCDCDC',  
+        boxShadow: '0 4px 6px #409cc4', 
+        padding: 2, 
+        borderRadius: 2, 
       }}
     >
-      <h3>{job.company.name}</h3>
+      <h3 sx={{color:'#1d2c57'}}>Company Name</h3>
       <p>India</p>
       <div>
-        <h3 sx={{ fontWeight: 'bold' }}>{job.title}</h3>
-        <p>{job.description}</p>
+        <h3 sx={{ fontWeight: 'bold',color:'#1d2c57' }}>Job Title</h3>
+        <p>Description</p>
       </div>
       
       <Box display="flex" gap={2}> {/* Flexbox container with gap between items */}
         <Badge
           sx={{
             backgroundColor: '#DCDCDC',
-            color: '#1976D2', 
+            color: '#10678c', 
             fontWeight: 'bold',
+            borderRadius: '8px'
           }}
         >
-          {job.position}
+          No. of Positions
         </Badge>
 
         <Badge
           sx={{
             backgroundColor: '#DCDCDC',
-            color: '#1976D2', 
+            color: '#3c4324', 
             fontWeight: 'bold',
+            borderRadius: '8px'
           }}
         >
-         {job.jobType}
+         Job Type
         </Badge>
 
         <Badge
           sx={{
             backgroundColor: '#DCDCDC',
-            color: '#1976D2', 
+            color: '#1d2c57', 
             fontWeight: 'bold',
+            borderRadius: '8px'
           }}
         >
-          {job.salary}
+          Salary
         </Badge>
       </Box>
     </Box>
